@@ -570,6 +570,7 @@ Object.prototype.isPrototypeOf(Dog.prototype);
 /*------------------------------------------
 Use Inheritance So You Don't Repeat Yourself
 --------------------------------------------
+
 There's a principle in programming called Don't Repeat Yourself (DRY). The reason repeated code is a problem is because any change requires 
 fixing code in multiple places. This usually means more work for programmers and more room for errors.
 
@@ -607,6 +608,7 @@ Bird.prototype = {
 Dog.prototype = {
   constructor: Dog
 };
+
 -------------------------------------------------------------------------------------------------------------------------------------
 The eat method is repeated in both Cat and Bear. Edit the code in the spirit of DRY by moving the eat method to the Animal supertype. */
 
@@ -643,6 +645,7 @@ Animal.prototype = {
 /*--------------------------------
 Inherit Behaviors from a Supertype
 ----------------------------------
+
 In the previous challenge, you created a supertype called Animal that defined behaviors shared by all animals:
 
 function Animal() { }
@@ -669,6 +672,7 @@ animal.eat();
 animal instanceof Animal;
 
 The instanceof method here would return true.
+
 -----------------------------------------------------------------------
 Use Object.create to make two instances of Animal named duck and beagle. */
 
@@ -691,6 +695,7 @@ let beagle = Object.create(Animal.prototype); // Change this line
 /*----------------------------------------------------
 Set the Child's Prototype to an Instance of the Parent
 ------------------------------------------------------
+
 In the previous challenge you saw the first step for inheriting behavior from the supertype (or parent) Animal: making a new instance of Animal.
 
 This challenge covers the next step: set the prototype of the subtype (or child)—in this case, Bird—to be an instance of Animal.
@@ -703,6 +708,7 @@ let duck = new Bird("Donald");
 duck.eat();
 
 duck inherits all of Animal's properties, including the eat method.
+
 --------------------------------------------------------------
 Modify the code so that instances of Dog inherit from Animal.*/
 
@@ -722,4 +728,102 @@ function Dog() { }
 Dog.prototype = Object.create(Animal.prototype)
 let beagle = new Dog();
 
+
+
+
+/*-------------------------------------
+Reset an Inherited Constructor Property
+---------------------------------------
+
+When an object inherits its prototype from another object, it also inherits the supertype's constructor property.
+
+Here's an example:
+
+function Bird() { }
+Bird.prototype = Object.create(Animal.prototype);
+let duck = new Bird();
+duck.constructor
+
+But duck and all instances of Bird should show that they were constructed by Bird and not Animal. To do so, you can manually set 
+the constructor property of Bird to the Bird object:
+
+Bird.prototype.constructor = Bird;
+duck.constructor
+
+-----------------------------------------------------------------------------------------------
+Fix the code so duck.constructor and beagle.constructor return their respective constructors.*/
+
+function Animal() { }
+function Bird() { }
+function Dog() { }
+
+Bird.prototype = Object.create(Animal.prototype);
+Dog.prototype = Object.create(Animal.prototype);
+
+// Only change code below this line
+
+Bird.prototype.constructor = Bird;
+Dog.prototype.constructor = Dog;
+
+let duck = new Bird();
+let beagle = new Dog();
+
+
+
+
+/*---------------------------
+Add Methods After Inheritance
+-----------------------------
+
+A constructor function that inherits its prototype object from a supertype constructor function can still have its own methods 
+in addition to inherited methods.
+
+For example, Bird is a constructor that inherits its prototype from Animal:
+
+function Animal() { }
+Animal.prototype.eat = function() {
+  console.log("nom nom nom");
+};
+function Bird() { }
+Bird.prototype = Object.create(Animal.prototype);
+Bird.prototype.constructor = Bird;
+
+In addition to what is inherited from Animal, you want to add behavior that is unique to Bird objects. 
+Here, Bird will get a fly() function. Functions are added to Bird's prototype the same way as any constructor function:
+
+Bird.prototype.fly = function() {
+  console.log("I'm flying!");
+};
+
+Now instances of Bird will have both eat() and fly() methods:
+
+let duck = new Bird();
+duck.eat();
+duck.fly();
+
+duck.eat() would display the string nom nom nom in the console, and duck.fly() would display the string I'm flying!.
+
+----------------------------------------------------------------------------------------------------------------
+Add all necessary code so the Dog object inherits from Animal and the Dog's prototype constructor is set to Dog. 
+Then add a bark() method to the Dog object so that beagle can both eat() and bark(). 
+The bark() method should print Woof! to the console. */
+
+function Animal() { }
+Animal.prototype.eat = function() { console.log("nom nom nom"); };
+
+function Dog() { }
+
+// Only change code below this line
+
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.bark = function(){
+  console.log("Woof!");
+}
+
+
+// Only change code above this line
+
+let beagle = new Dog();
 
