@@ -75,8 +75,11 @@ Make Code More Reusable with the this Keyword
 The last challenge introduced a method to the duck object. It used duck.name dot notation to access the value for the name property within the return statement:
 
 sayName: function() {return "The name of this duck is " + duck.name + ".";}
-While this is a valid way to access the object's property, there is a pitfall here. If the variable name changes, any code referencing the original name would 
-need to be updated as well. In a short object definition, it isn't a problem, but if an object has many references to its properties there is a greater chance for error.
+
+While this is a valid way to access the object's property, there is a pitfall here. If the variable name changes, 
+any code referencing the original name would 
+need to be updated as well. In a short object definition, it isn't a problem, but if an object has many references to its properties 
+there is a greater chance for error.
 
 A way to avoid these issues is with the this keyword:
 
@@ -150,8 +153,9 @@ function Bird() {
 let blueBird = new Bird();
 NOTE: this inside the constructor always refers to the object being created.
 
-Notice that the new operator is used when calling a constructor. This tells JavaScript to create a new instance of Bird called blueBird. Without the new operator, 
-this inside the constructor would not point to the newly created object, giving unexpected results. Now blueBird has all the properties defined inside the Bird constructor:
+Notice that the new operator is used when calling a constructor. This tells JavaScript to create a new instance of Bird called blueBird. 
+Without the new operator, this inside the constructor would not point to the newly created object, giving unexpected results. Now blueBird has 
+all the properties defined inside the Bird constructor:
 
 blueBird.name;
 blueBird.color;
@@ -188,8 +192,10 @@ let swan = new Bird();
 swan.name = "Carlos";
 swan.color = "white";
 
-Suppose you were writing a program to keep track of hundreds or even thousands of different birds in an aviary. It would take a lot of time to create all the birds, 
-then change the properties to different values for every one. To more easily create different Bird objects, you can design your Bird constructor to accept parameters:
+Suppose you were writing a program to keep track of hundreds or even thousands of different birds in an aviary. 
+It would take a lot of time to create all the birds, 
+then change the properties to different values for every one. To more easily create different Bird objects, 
+you can design your Bird constructor to accept parameters:
 
 function Bird(name, color) {
   this.name = name;
@@ -197,8 +203,8 @@ function Bird(name, color) {
   this.numLegs = 2;
 }
 
-Then pass in the values as arguments to define each unique bird into the Bird constructor: let cardinal = new Bird("Bruce", "red"); This gives a new instance of Bird 
-with name and color properties set to Bruce and red, respectively. The numLegs property is still set to 2. The cardinal has these properties:
+Then pass in the values as arguments to define each unique bird into the Bird constructor: let cardinal = new Bird("Bruce", "red"); This gives a new instance 
+of Bird with name and color properties set to Bruce and red, respectively. The numLegs property is still set to 2. The cardinal has these properties:
 
 cardinal.name
 cardinal.color
@@ -252,8 +258,9 @@ let canary = {
 canary instanceof Bird;
 This instanceof method would return false.
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Create a new instance of the House constructor, calling it myHouse and passing a number of bedrooms. Then, use instanceof to verify that it is an instance of House.*/
+----------------------------------------------------------------------------------------------------
+Create a new instance of the House constructor, calling it myHouse and passing a number of bedrooms. 
+Then, use instanceof to verify that it is an instance of House.*/
 
 function House(numBedrooms) {
     this.numBedrooms = numBedrooms;
@@ -281,7 +288,8 @@ function Bird(name) {
 
 let duck = new Bird("Donald");
 let canary = new Bird("Tweety");
-name and numLegs are called own properties, because they are defined directly on the instance object. That means that duck and canary each has its own separate 
+name and numLegs are called own properties, because they are defined directly on the instance object. 
+That means that duck and canary each has its own separate 
 copy of these properties. In fact every instance of Bird will have its own copy of these properties. 
 The following code adds all of the own properties of duck to the array ownProps:
 
@@ -328,7 +336,8 @@ Since numLegs will probably have the same value for all instances of Bird, you e
 
 This may not be an issue when there are only two instances, but imagine if there are millions of instances. That would be a lot of duplicated variables.
 
-A better way is to use the prototype of Bird. Properties in the prototype are shared among ALL instances of Bird. Here's how to add numLegs to the Bird prototype:
+A better way is to use the prototype of Bird. Properties in the prototype are shared among ALL instances of Bird. Here's how to add numLegs 
+to the Bird prototype:
 
 Bird.prototype.numLegs = 2;
 
@@ -1022,11 +1031,12 @@ In the previous challenge, bird had a public property name. It is considered pub
 
 bird.name = "Duffy";
 
-Therefore, any part of your code can easily change the name of bird to any value. Think about things like passwords and bank accounts being easily changeable 
-by any part of your codebase. That could cause a lot of issues.
+Therefore, any part of your code can easily change the name of bird to any value. Think about things like passwords and bank accounts being 
+easily changeable by any part of your codebase. That could cause a lot of issues.
 
-The simplest way to make this public property private is by creating a variable within the constructor function. This changes the scope of that variable to be 
-within the constructor function versus available globally. This way, the variable can only be accessed and changed by methods also within the constructor function.
+The simplest way to make this public property private is by creating a variable within the constructor function. 
+This changes the scope of that variable to be within the constructor function versus available globally. This way, the variable can only be accessed 
+and changed by methods also within the constructor function.
 
 function Bird() {
   let hatchedEgg = 10;
@@ -1067,7 +1077,8 @@ A common pattern in JavaScript is to execute a function as soon as it is declare
 
 This is an anonymous function expression that executes right away, and outputs Chirp, chirp! immediately.
 
-Note that the function has no name and is not stored in a variable. The two parentheses () at the end of the function expression cause it to be immediately executed or invoked. 
+Note that the function has no name and is not stored in a variable. The two parentheses () at the end of the function expression cause 
+it to be immediately executed or invoked. 
 This pattern is known as an immediately invoked function expression or IIFE.
 
 --------------------------------------------------------------------------------------------------------------------------------
